@@ -1,10 +1,9 @@
 # all the imports
 from flask import Flask, request, session, g, redirect, url_for, \
-     abort, render_template, flash
+    abort, render_template, flash
 import subprocess
 import sys
 import argparse
-
 
 # this is a single line comment
 
@@ -19,11 +18,14 @@ It is good for long descriptions of stuff.
 # create the application
 app = Flask(__name__)
 
+
 """
 @app.route is a decorator - it tells the app what URL to respond to
-with this method. This method will be run when someone goes to 
+with this method. This method will be run when someone goes to
 http://your_app_address/
 """
+
+
 @app.route('/')
 def show_form():
     # this method will show a form asking for a search string
@@ -41,12 +43,13 @@ def show_procs():
 
     # let's get the host name of this vm to display on the page
     hostname = get_hostname()
-    
+
     # first, get the search term out of the POST data
     term = request.form['term']
 
     # now lets get all the system processes
-    raw_procs = subprocess.Popen(['ps', 'aux'], stdout=subprocess.PIPE).communicate()[0]
+    raw_procs = subprocess.Popen(['ps', 'aux'],
+                                 stdout=subprocess.PIPE).communicate()[0]
 
     # now filter the raw process list to find lines with our term
     count = 0
@@ -58,7 +61,8 @@ def show_procs():
             count += 1
 
     # render the search template, this time with our data
-    return render_template('proc_search.html', procs=procs, count=count, hostname=hostname)
+    return render_template('proc_search.html',
+                           procs=procs, count=count, hostname=hostname)
 
 
 # this method doesn't have a decorator, it's just a utility method
@@ -66,7 +70,8 @@ def get_hostname():
     # use the subprocess module to get the hostname
     # if there is some error, just use a default
     try:
-        hostname = subprocess.Popen('hostname', stdout=subprocess.PIPE).communicate()[0]
+        hostname = subprocess.Popen('hostname',
+                                    stdout=subprocess.PIPE).communicate()[0]
     except CalledProcessError:
         hostname = "Unknown"
 
@@ -82,11 +87,11 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--ip", help="listen to this IP address",
-                                default="127.0.0.1")
+                        default="127.0.0.1")
     parser.add_argument("-p", "--port", help="listen to this port",
-                                default="5000", type=int)
+                        default="5000", type=int)
     parser.add_argument("-d", "--debug", help="turn debugging on",
-                                action="store_true")
+                        action="store_true")
 
     args = parser.parse_args()
 
