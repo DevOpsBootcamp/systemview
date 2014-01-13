@@ -69,11 +69,12 @@ def show_procs():
 def get_hostname():
     # use the subprocess module to get the hostname
     # if there is some error, just use a default
+    hostname = "Unknown"
     try:
-        hostname = subprocess.Popen('hostname',
+        hostname = subprocess.Popen(['hostname'],
                                     stdout=subprocess.PIPE).communicate()[0]
-    except CalledProcessError:
-        hostname = "Unknown"
+    except:
+        pass
 
     # subprocess returns a hostname with a newline (\n) - lets remove it
     return hostname.rstrip()
