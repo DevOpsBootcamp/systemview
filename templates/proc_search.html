@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block body %}
+    <form action="{{ url_for('show_procs') }}" method=post class=search-form>
+        <p>Enter the search term to see matching processes</p>
+        <dl>
+          <dt>Process:
+          <dd><input type=text size=30 name=term>
+          <dd><input type=submit value=Search>
+        </dl>
+    </form>
+
+    <ul class=procs>
+    {% if count %}
+        <h3>{{ count }} processes found on {{ hostname }}</h3>
+    {% endif %}
+
+    {% for proc in procs %}
+        <li>{{ proc|safe }}</li>
+    {% else %}
+        <li><em>No processes contain that string.</em></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
