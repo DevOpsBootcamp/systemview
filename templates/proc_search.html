@@ -12,10 +12,11 @@
     <ul class=procs>
     {% if count %}
         <h3>{{ count }} processes found on {{ hostname }}</h3>
+        <li><pre>USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</pre></li>
     {% endif %}
 
     {% for proc in procs %}
-        <li>{{ proc|safe }}</li>
+        <li><pre>{{ proc|safe }}</pre></li>
     {% else %}
         <li><em>No processes contain that string.</em></li>
     {% endfor %}
