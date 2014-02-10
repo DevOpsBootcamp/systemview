@@ -21,4 +21,17 @@
         <li><em>No processes contain that string.</em></li>
     {% endfor %}
     </ul>
+    <hr>
+    {% if searches %}
+    <h3> Previous searches:
+    <form action="{{ url_for('show_procs') }}" method=post class=search-form>
+        <ul class=procs>
+        {% for search in searches %}
+            <li><button name=term type=submit value={{ search.term|safe }} />{{ search.term|safe }}</li>
+        {% endfor %}
+        </ul>
+    </form>
+    {% else %}
+        <li><em>Nothing has been searched yet.</em></li>
+    {% endif %}
 {% endblock %}
