@@ -48,7 +48,7 @@ def show_procs():
     term = request.form['term']
 
     # now lets get all the system processes
-    raw_procs = subprocess.Popen(['ps', 'aux'],
+    raw_procs = subprocess.Popen(['ps', 'auxh'],
                                  stdout=subprocess.PIPE).communicate()[0]
 
     # now filter the raw process list to find lines with our term
