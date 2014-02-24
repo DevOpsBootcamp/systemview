@@ -98,7 +98,8 @@ def show_procs(term=None):
     term = request.form['term']
 
     # now lets get all the system processes
-    raw_procs = subprocess.Popen(['ps', 'auxh'],
+    cmd = "ps aux | grep " + term
+    raw_procs = subprocess.Popen(cmd, shell=True,
                                  stdout=subprocess.PIPE).communicate()[0]
 
     # now filter the raw process list to find lines with our term
@@ -111,9 +112,7 @@ def show_procs(term=None):
             count += 1
 
     # check to see if the term is already in the db
-
     search = db.session.execute("select * from searches where term=\"" + term + "\"").fetchall()
-    print search
 
     # check to see that we entered a term, and it's not in the db
     if term and not search:
