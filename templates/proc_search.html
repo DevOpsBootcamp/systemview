@@ -48,9 +48,11 @@
     <h3> Previous searches: </h3>
     <form action="{{ url_for('show_procs') }}" method=post class=search-form>
         <ul class=procs>
+        {% autoescape false %}
         {% for search in searches %}
             <li><button name=term type=submit value={{ search.term|escape }} >{{ search.term|escape }}</button></li>
         {% endfor %}
+        {% endautoescape %}
         </ul>
     </form>
     {% else %}
