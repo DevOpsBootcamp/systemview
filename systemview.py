@@ -111,7 +111,9 @@ def show_procs(term=None):
             count += 1
 
     # check to see if the term is already in the db
-    search = Search.query.filter_by(term=term).first()
+
+    search = db.session.execute("select * from searches where term=\"" + term + "\"").fetchall()
+    print search
 
     # check to see that we entered a term, and it's not in the db
     if term and not search:
