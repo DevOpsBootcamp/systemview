@@ -1,0 +1,10 @@
+WSGISocketPrefix /var/run
+WSGIDaemonProcess systemview user=apache group=apache threads=5
+WSGIScriptAlias /systemview /var/www/systemview/systemview.wsgi
+
+<Directory /var/www/systemview>
+        WSGIProcessGroup systemview
+        WSGIApplicationGroup %{GLOBAL}
+        Order deny,allow
+        Allow from all
+</Directory>
