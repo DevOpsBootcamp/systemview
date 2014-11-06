@@ -5,6 +5,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 import subprocess
 import sys
 import argparse
+import platform
 
 # this is a single line comment
 
@@ -20,7 +21,7 @@ It is good for long descriptions of stuff.
 app = Flask(__name__)
 
 # tell the app where our db is.
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://vagrant:password@localhost/systemview'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./systemview.db'
 
 # set up the db through SQLAlchemy
 db = SQLAlchemy(app)
@@ -47,8 +48,6 @@ class Search(db.Model):
 with this method. This method will be run when someone goes to
 http://your_app_address/
 """
-
-
 @app.route('/')
 def show_form():
     # this method will show a form asking for a search string
@@ -64,6 +63,9 @@ def show_form():
                             searches=searches)
 
 
+"""
+This method will be run when someone visits http://your_app_address/procs/
+"""
 @app.route('/procs/', methods=['POST'])
 def show_procs(term=None):
     # this method gets the system processes matching the search term
@@ -109,17 +111,7 @@ def show_procs(term=None):
 
 # this method doesn't have a decorator, it's just a utility method
 def get_hostname():
-    # use the subprocess module to get the hostname
-    # if there is some error, just use a default
-    hostname = "Unknown"
-    try:
-        hostname = subprocess.Popen(['hostname'],
-                                    stdout=subprocess.PIPE).communicate()[0]
-    except:
-        pass
-
-    # subprocess returns a hostname with a newline (\n) - lets remove it
-    return hostname.rstrip()
+    return platform.node()
 
 
 # this starts the application up if you run it from the
