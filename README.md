@@ -18,6 +18,7 @@ $ source ~/systemview_venv/bin/activate # activate the virtualenv
 $ git clone git@github.com:DevOpsBootcamp/systemview.git # clone the code
 $ cd systemview # enter the application's directory
 $ pip install -r requirements.txt # install the packages systemview needs
+$ python create_tables.py # create the database tables
 ``` 
 
 Using the app
