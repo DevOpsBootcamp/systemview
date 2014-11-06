@@ -1,2 +1,4 @@
 *.pyc
 *.db
+v/
+systemview_venv/
