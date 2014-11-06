@@ -12,23 +12,13 @@ Do this in your VM! To get into your VM, use `vagrant ssh` in the correct repo.
 
 ```
 $ cd
-$ sudo yum -y install python-virtualenv*
-$ virtualenv ~/systemview_venv
-$ source ~/systemview_venv/bin/activate
-$ pip install flask
-$ pip install argparse
-$ git clone git@github.com:DevOpsBootcamp/systemview.git
-$ deactivate
+$ sudo yum -y install python-virtualenv* # Installs the program virtualenv
+$ virtualenv ~/systemview_venv # create a new virtualenv in your home directory
+$ source ~/systemview_venv/bin/activate # activate the virtualenv
+$ git clone git@github.com:DevOpsBootcamp/systemview.git # clone the code
+$ cd systemview # enter the application's directory
+$ pip install -r requirements.txt # install the packages systemview needs
 ``` 
-
-Setting up the database to use save-search
-------------------------------------------
-
-All of the database development has been done on the `save-search` branch. 
-
-In your VM (your prompt will read `vagrant@...` rather than your usual
-username), use the catch-up instructions from
-https://github.com/DevOpsBootcamp/catch-up
 
 Using the app
 -------------
@@ -36,10 +26,9 @@ Using the app
 Once everything is installed and the database is set up correctly:
 
 ```
-$ source ~/systemview_venv/bin/activate
+$ source ~/systemview_venv/bin/activate # enter the virtual environment
 $ cd ~/systemview
 $ git branch                          # check that you're on the correct branch
-$ sudo /sbin/service mysqld start     # can only connect to db if it's running
-$ python systemview.py -i 0.0.0.0 -d
+$ python systemview.py -i 0.0.0.0 -d # start the webapp
 # in your web browser, go to 0.0.0.0:5050
 ``` 

@@ -48,8 +48,6 @@ class Search(db.Model):
 with this method. This method will be run when someone goes to
 http://your_app_address/
 """
-
-
 @app.route('/')
 def show_form():
     # this method will show a form asking for a search string
@@ -65,6 +63,9 @@ def show_form():
                             searches=searches)
 
 
+"""
+This method will be run when someone visits http://your_app_address/procs/
+"""
 @app.route('/procs/', methods=['POST'])
 def show_procs(term=None):
     # this method gets the system processes matching the search term
