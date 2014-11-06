@@ -5,6 +5,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 import subprocess
 import sys
 import argparse
+import platform
 
 # this is a single line comment
 
@@ -109,17 +110,7 @@ def show_procs(term=None):
 
 # this method doesn't have a decorator, it's just a utility method
 def get_hostname():
-    # use the subprocess module to get the hostname
-    # if there is some error, just use a default
-    hostname = "Unknown"
-    try:
-        hostname = subprocess.Popen(['hostname'],
-                                    stdout=subprocess.PIPE).communicate()[0]
-    except:
-        pass
-
-    # subprocess returns a hostname with a newline (\n) - lets remove it
-    return hostname.rstrip()
+    return platform.node()
 
 
 # this starts the application up if you run it from the
