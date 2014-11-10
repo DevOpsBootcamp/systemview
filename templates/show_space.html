@@ -1,0 +1,24 @@
+{# If you've come here you must be curious, and willing to dig deeper.
+This is not just plain html. We are using something called jinja 
+Jinja is an html templating language. It will write your html for you 
+based off of variables you passed it when you called 'render_template'
+Things in curly braces are jinja. Things in angle brackets are html.
+Don't worry, it's not too complicated! #}
+
+{# This is a comment, in case you haven't figured that out already #}
+
+{# The html generated from this file will get knitted together with the html
+generated from layout.html #}
+{% extends "layout.html" %}
+{% block body %}
+
+    {# This creates an html list from the python list named space #}
+    <h3>Remaining space on {{ hostname }}</h3>
+    <ul class=procs>
+        <li><pre>Filesystem                                              Size  Used Avail Use% Mounted on</pre></li>
+
+    {% for line in space %}
+        <li><pre>{{ line|safe }}</pre></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
