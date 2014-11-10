@@ -1,6 +1,6 @@
 {# If you've come here you must be curious, and willing to dig deeper.
-This is not just plain html. We are using something called jinja 
-Jinja is an html templating language. It will write your html for you 
+This is not just plain html. We are using something called jinja
+Jinja is an html templating language. It will write your html for you
 based off of variables you passed it when you called 'render_template'
 Things in curly braces are jinja. Things in angle brackets are html.
 Don't worry, it's not too complicated! #}
@@ -18,7 +18,10 @@ generated from layout.html #}
         <li><pre>Filesystem                                              Size  Used Avail Use% Mounted on</pre></li>
 
     {% for line in space %}
-        <li><pre>{{ line|safe }}</pre></li>
+	    {# escape is a filter which cleans the value of line in case it has
+		html in it. This is because sometimes the output of df will have "<"
+		characters in it. #}
+        <li><pre>{{ line|escape }}</pre></li>
     {% endfor %}
     </ul>
 {% endblock %}

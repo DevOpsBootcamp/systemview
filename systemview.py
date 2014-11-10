@@ -111,7 +111,7 @@ def show_procs(term=None):
 """
 This method will show the amount of hard drive space available on your VM.
 It uses the command df. What does df do? What does the -h option do?
-(hint: man df)
+(hint: $ man df)
 You'll notice that there is no decorator (line with an '@' sign). There is no
 URL you can visit to view this page. Can you fix this?
 """
@@ -120,12 +120,14 @@ def show_space():
     hostname = get_hostname()
 
     # What happens if you run this command in your terminal?
-    # pydoc subprocess.Popen
+    # $ pydoc subprocess.Popen
     raw_space = subprocess.Popen(['df', '-h'],
                                  stdout=subprocess.PIPE).communicate()[0]
-    # take the raw ouput of df, and split it on newlines (\n)
+    # take the raw ouput of df, and split it on newlines (\n).
+    # Returns a list of each line.
     space = raw_space.split('\n')
-    # Then, get everything but the first element. This is called a slice.
+    # The first line of output is just a bunch of column headings we don't want
+    # We should get rid of it using a slice.
     # uncomment the print statements to see space printed in your terminal
     # when you visit the webpage.
     #print 'before slicing', space
