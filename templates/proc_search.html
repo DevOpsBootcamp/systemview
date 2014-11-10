@@ -8,26 +8,28 @@
           <dd><input type=submit value=Search>
         </dl>
     </form>
+    {% if count %}
+        <h3>{{ count }} processes found on {{ hostname }}</h3>
+    {% endif %}
 
     <ul class=procs>
     {% if count %}
-        <h3>{{ count }} processes found on {{ hostname }}</h3>
         <li><pre>USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</pre></li>
     {% endif %}
 
     {% for proc in procs %}
-        <li><pre>{{ proc|safe }}</pre></li>
+        <li><pre>{{ proc|escape }}</pre></li>
     {% else %}
         <li><em>No processes contain that string.</em></li>
     {% endfor %}
     </ul>
     <hr>
     {% if searches %}
-    <h3> Previous searches:
+    <h3> Previous searches: </h3>
     <form action="{{ url_for('show_procs') }}" method=post class=search-form>
         <ul class=procs>
         {% for search in searches %}
-            <li><button name=term type=submit value={{ search.term|safe }} />{{ search.term|safe }}</li>
+            <li><button name=term type=submit value={{ search.term|escape }} >{{ search.term|escape }}</button></li>
         {% endfor %}
         </ul>
     </form>
