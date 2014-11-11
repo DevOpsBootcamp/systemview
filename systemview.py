@@ -108,6 +108,39 @@ def show_procs(term=None):
     return render_template('proc_search.html', searches=searches,
                            procs=procs, count=count, hostname=hostname)
 
+"""
+This method will show the amount of hard drive space available on your VM.
+It uses the command df. What does df do? What does the -h option do?
+(hint: $ man df)
+You'll notice that there is no decorator (line with an '@' sign). There is no
+URL you can visit to view this page. Can you fix this?
+"""
+def show_space():
+    # let's get the host name of this vm to display on the page
+    hostname = get_hostname()
+
+    # What happens if you run this command in your terminal?
+    # $ pydoc subprocess.Popen
+    raw_space = subprocess.Popen(['df', '-h'],
+                                 stdout=subprocess.PIPE).communicate()[0]
+    # take the raw ouput of df, and split it on newlines (\n).
+    # Returns a list of each line.
+    space = raw_space.split('\n')
+    # The first line of output is just a bunch of column headings we don't want
+    # We should get rid of it using a slice.
+    # uncomment the print statements to see space printed in your terminal
+    # when you visit the webpage.
+    #print 'before slicing', space
+    space = space[1:]
+    #print 'after slicing', space
+
+    # get the length of space
+    count = len(space)
+
+    # now render the search template with this data
+    # What is in the file `templates/show_space.html`? Is it just html?
+    return render_template('show_space.html', space=space, hostname=hostname)
+
 
 # this method doesn't have a decorator, it's just a utility method
 def get_hostname():
