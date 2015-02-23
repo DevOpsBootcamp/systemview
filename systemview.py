@@ -42,7 +42,7 @@ It is good for long descriptions of stuff.
 app = Flask(__name__)
 
 # tell the app where our db is.
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./systemview.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://systemview.db'
 
 # set up the db through SQLAlchemy
 db = SQLAlchemy(app)
