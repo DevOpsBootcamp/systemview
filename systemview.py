@@ -27,6 +27,7 @@ import subprocess
 import sys
 import argparse
 import platform
+import pdb
 
 # this is a single line comment
 
@@ -181,6 +182,7 @@ if __name__ == '__main__':
                         default="5000", type=int)
     parser.add_argument("-d", "--debug", help="turn debugging on",
                         action="store_true")
+    #pdb.set_trace()
 
     args = parser.parse_args()
 
