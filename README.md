@@ -23,7 +23,7 @@ $ virtualenv ~/systemview_venv
 $ source ~/systemview_venv/bin/activate
 
 #Clone the repository
-$ git clone git@github.com:DevOpsBootcamp/systemview.git 
+$ git clone https://github.com/DevOpsBootcamp/systemview
 
 #Go to the applications directory
 $ cd systemview
